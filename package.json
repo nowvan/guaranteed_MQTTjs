@@ -45,7 +45,6 @@
   },
   "files": [
     "dist/",
-    "CONTRIBUTING.md",
     "doc",
     "lib",
     "bin",
