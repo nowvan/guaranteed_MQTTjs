@@ -1,5 +1,5 @@
-var mqtt = require('./')
-var client = mqtt.connect('mqtt://localhost', {
+let mqtt = require('./')
+let client = mqtt.connect('mqtt://localhost', {
   protocolVersion: 5,
   reconnectPeriod: 3000000,
   connectTimeout: 30000000,
@@ -23,11 +23,21 @@ client.on('connect', function (connack) {
   if (connack) {
     console.log('connack', connack)
   }
-  client.subscribe({'test1': {qos: 2}}, function (err) {
+  let opt = {qos: 2,
+    properties: {
+      userProperties: {
+        e2e: true,
+        retainCount: 20
+      }
+    }
+  }
+  client.subscribe({'test1': {qos: 2}}, opt
+    // ,function (err) {
     // if (!err) {
     //   setTimeout(() => { client.publish('test1', 'Hello mqtt', {qos: 2}) }, 3000)
     // }
-  })
+    // }
+  )
 })
 
 client.on('message', function (topic, message) {
