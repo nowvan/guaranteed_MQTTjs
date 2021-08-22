@@ -50,7 +50,7 @@ handleClient = function (client) {
 
       if (publish) {
         try {
-          c.publish({topic: packet.topic, payload: packet.payload})
+          c.publish({ topic: packet.topic, payload: packet.payload })
         } catch (error) {
           delete self.clients[k]
         }

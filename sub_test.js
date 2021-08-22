@@ -27,17 +27,8 @@ client.on('connect', function (connack) {
     properties: {
       userProperties: {
         e2e: true,
-        retainCount: 20
-      }
-    }
-  }
-  client.subscribe({'test1': {qos: 2}}, opt
-    // ,function (err) {
-    // if (!err) {
-    //   setTimeout(() => { client.publish('test1', 'Hello mqtt', {qos: 2}) }, 3000)
-    // }
-    // }
-  )
+        retainCount: 20 } } }
+  client.subscribe('test', opt)
 })
 
 client.on('message', function (topic, message) {

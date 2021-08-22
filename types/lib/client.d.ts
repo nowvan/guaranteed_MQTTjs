@@ -130,7 +130,7 @@ export declare class MqttClient extends events.EventEmitter {
    *   @param {Function}[opts.cbStorePut] - function(){}
    *       called when message is put into `outgoingStore`
    *
-   * @param {Function} [callback] - function(err){}
+   * @param {Function} [callback?] - function(err){}
    *    called when publish succeeds or fails
    *
    * @returns {Client} this - for chaining
@@ -141,8 +141,8 @@ export declare class MqttClient extends events.EventEmitter {
    *     client.publish('topic', 'message', {qos: 1, retain: true})
    * @example client.publish('topic', 'message', console.log)
    */
-  public publish (topic: string, message: string | Buffer,
-                 opts: IClientPublishOptions, callback?: PacketCallback): this
+  public publish(topic: string, message: string | Buffer,
+                 opts: { qos: number, properties: { correlationData: Buffer, userProperties: { e2eCount: number, retainLimit: number }, responseTopic: any } }, callback?: PacketCallback): this
   public publish (topic: string, message: string | Buffer,
                  callback?: PacketCallback): this
 

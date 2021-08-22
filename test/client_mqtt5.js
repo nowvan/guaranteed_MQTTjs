@@ -279,7 +279,7 @@ describe('MQTT 5.0', function () {
     }
     var client = mqtt.connect(opts)
     client.once('connect', () => {
-      client.publish('a/b', 'message', {qos: 1}, function (err, packet) {
+      client.publish('a/b', 'message', { qos: 1 }, function (err, packet) {
         assert.strictEqual(err.message, 'Publish error: Session taken over')
         assert.strictEqual(err.code, 142)
       })
@@ -298,7 +298,7 @@ describe('MQTT 5.0', function () {
     }
     var client = mqtt.connect(opts)
     client.once('connect', () => {
-      client.publish('a/b', 'message', {qos: 2}, function (err, packet) {
+      client.publish('a/b', 'message', { qos: 2 }, function (err, packet) {
         assert.strictEqual(err.message, 'Publish error: Session taken over')
         assert.strictEqual(err.code, 142)
       })

@@ -146,7 +146,7 @@ describe('MqttClient', function () {
         reconnectPeriod: 0
       })
       client.once('connect', () => {
-        client.publish('fakeTopic', 'fakeMessage', {qos: 1}, (err, result) => {
+        client.publish('fakeTopic', 'fakeMessage', { qos: 1 }, (err, result) => {
           assert.exists(err)
           pubCallbackCalled = true
         })

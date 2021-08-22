@@ -569,7 +569,7 @@ module.exports = function (server, config) {
     it('should not queue qos 0 messages if queueQoSZero is false', function (done) {
       var client = connect({queueQoSZero: false})
 
-      client.publish('test', 'test', {qos: 0})
+      client.publish('test', 'test', { qos: 0 })
       assert.strictEqual(client.queue.length, 0)
       client.on('connect', function () {
         setTimeout(function () {
@@ -581,8 +581,8 @@ module.exports = function (server, config) {
     it('should queue qos != 0 messages', function (done) {
       var client = connect({queueQoSZero: false})
 
-      client.publish('test', 'test', {qos: 1})
-      client.publish('test', 'test', {qos: 2})
+      client.publish('test', 'test', { qos: 1 })
+      client.publish('test', 'test', { qos: 2 })
       client.subscribe('test')
       client.unsubscribe('test')
       assert.strictEqual(client.queue.length, 2)
@@ -641,14 +641,14 @@ module.exports = function (server, config) {
           if (packet.cmd === 'connack') {
             setImmediate(
               function () {
-                client.publish('test', 'payload3', {qos: 1})
-                client.publish('test', 'payload4', {qos: 0})
+                client.publish('test', 'payload3', { qos: 1 })
+                client.publish('test', 'payload4', { qos: 0 })
               }
             )
           }
         })
-        client.publish('test', 'payload1', {qos: 2})
-        client.publish('test', 'payload2', {qos: 2})
+        client.publish('test', 'payload1', { qos: 2 })
+        client.publish('test', 'payload2', { qos: 2 })
       })
     })
 
@@ -656,7 +656,7 @@ module.exports = function (server, config) {
       var client = connect({queueQoSZero: false})
       var called = false
 
-      client.publish('test', 'test', {qos: 0}, function () {
+      client.publish('test', 'test', { qos: 0 }, function () {
         called = true
       })
 
@@ -1335,11 +1335,11 @@ module.exports = function (server, config) {
 
         client.on('connect', function () {
           if (!reconnect) {
-            client.publish('topic', 'payload1', {qos: 1})
-            client.publish('topic', 'payload2', {qos: 1})
+            client.publish('topic', 'payload1', { qos: 1 })
+            client.publish('topic', 'payload2', { qos: 1 })
             client.end(true)
           } else {
-            client.publish('topic', 'payload3', {qos: 1})
+            client.publish('topic', 'payload3', { qos: 1 })
           }
         })
         client.on('close', function () {
@@ -1368,7 +1368,7 @@ module.exports = function (server, config) {
       }
 
       client.on('connect', function () {
-        client.publish('test', 'test', {qos: qos, cbStorePut: cbStorePut}, function (err) {
+        client.publish('test', 'test', { qos: qos, cbStorePut: cbStorePut }, function (err) {
           if (err) done(err)
           callbacks.push('publish')
           assert.deepEqual(callbacks, expected)
@@ -2861,7 +2861,7 @@ module.exports = function (server, config) {
 
         client.on('connect', function () {
           if (!reconnect) {
-            client.publish('topic', 'payload', {qos: 1})
+            client.publish('topic', 'payload', { qos: 1 })
           }
         })
         client.on('error', function () {})
@@ -2907,7 +2907,7 @@ module.exports = function (server, config) {
 
         client.on('connect', function () {
           if (!reconnect) {
-            client.publish('topic', 'payload', {qos: 2})
+            client.publish('topic', 'payload', { qos: 2 })
           }
         })
         client.on('error', function () {})
@@ -2958,7 +2958,7 @@ module.exports = function (server, config) {
 
         client.on('connect', function () {
           if (!reconnect) {
-            client.publish('topic', 'payload', {qos: 2})
+            client.publish('topic', 'payload', { qos: 2 })
           }
         })
         client.on('error', function () {})
@@ -3027,9 +3027,9 @@ module.exports = function (server, config) {
 
         client.on('connect', function () {
           if (!reconnect) {
-            client.publish('topic', 'payload1', {qos: 1})
-            client.publish('topic', 'payload2', {qos: 1})
-            client.publish('topic', 'payload3', {qos: 1})
+            client.publish('topic', 'payload1', { qos: 1 })
+            client.publish('topic', 'payload2', { qos: 1 })
+            client.publish('topic', 'payload3', { qos: 1 })
           }
         })
         client.on('error', function () {})
