@@ -32,9 +32,14 @@ client.on('connect', function (connack) {
       userProperties: {
         e2eCount: 1,
         retainLimit: 20 } } }
-  client.publish('test', 'Hello mqtt e2e', opt)
+  client.publish('test', 'Hello mqtt e2e 1', opt)
+  client.publish('test', 'Hello mqtt e2e 2', opt)
+  client.publish('test', 'Hello mqtt e2e 3', opt)
+  // setTimeout(() => { client.publish('test', 'Hello mqtt e2e', opt) }, 3000)
+  // setTimeout(() => { client.publish('test', 'Hello mqtt e2e', opt) }, 6000)
 })
 
-client.on('message', function (topic, message) {
+client.on('message', function (topic, message, packet) {
   console.log(message.toString())
+  console.log(packet)
 })
