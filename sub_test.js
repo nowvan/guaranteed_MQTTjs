@@ -1,9 +1,9 @@
 let mqtt = require('./')
 let client = mqtt.connect('mqtt://localhost', {
   protocolVersion: 5,
-  reconnectPeriod: 3000000,
+  reconnectPeriod: 500 * 1000,
   connectTimeout: 30000000,
-  keepalive: 0,
+  keepalive: 7000,
   clean: false,
   clientId: 'mqttjs_sub',
   properties: {
@@ -24,6 +24,7 @@ client.on('connect', function (connack) {
     console.log('connack', connack)
   }
   let opt = {qos: 2,
+    rh: 1,
     properties: {
       userProperties: {
         e2e: true,
@@ -31,6 +32,6 @@ client.on('connect', function (connack) {
   client.subscribe('test', opt)
 })
 
-client.on('message', function (topic, message) {
-  console.log(message.toString())
+client.on('message', function (topic, message, packet) {
+  console.log(message.toString(), packet)
 })

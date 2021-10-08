@@ -1,7 +1,7 @@
 let mqtt = require('./')
 let client = mqtt.connect('mqtt://localhost', {
   protocolVersion: 5,
-  reconnectPeriod: 3000000,
+  reconnectPeriod: 30000000,
   connectTimeout: 30000000,
   keepalive: 0,
   clean: false,
@@ -24,8 +24,9 @@ client.on('connect', function (connack) {
   if (connack) {
     console.log('connack', connack)
   }
-  client.subscribe(connack.properties.responseInformation, {qos: 1})
+  // client.subscribe(connack.properties.responseInformation, {qos: 1})
   let opt = {qos: 2,
+    retain: true,
     properties: {
       responseTopic: connack.properties.responseInformation,
       correlationData: Buffer.from([1, 2, 3, 4]),
@@ -33,8 +34,8 @@ client.on('connect', function (connack) {
         e2eCount: 1,
         retainLimit: 20 } } }
   client.publish('test', 'Hello mqtt e2e 1', opt)
-  client.publish('test', 'Hello mqtt e2e 2', opt)
-  client.publish('test', 'Hello mqtt e2e 3', opt)
+  // client.publish('test', 'Hello mqtt e2e 2', opt)
+  // client.publish('test', 'Hello mqtt e2e 3', opt)
   // setTimeout(() => { client.publish('test', 'Hello mqtt e2e', opt) }, 3000)
   // setTimeout(() => { client.publish('test', 'Hello mqtt e2e', opt) }, 6000)
 })
